@@ -17,7 +17,7 @@ export async function getPropertyCount(): Promise<number> {
 
   const simulation = await server.simulateTransaction(tx);
   
-  if (rpc.Api.isSimulationSuccess(simulation)) {
+  if (rpc.Api.isSimulationSuccess(simulation) && simulation.result) {
     return scValToNative(simulation.result.retval) as number;
   }
   return 0;
@@ -36,7 +36,7 @@ export async function getProperty(id: number): Promise<any> {
   
     const simulation = await server.simulateTransaction(tx);
     
-    if (rpc.Api.isSimulationSuccess(simulation)) {
+    if (rpc.Api.isSimulationSuccess(simulation) && simulation.result) {
       return scValToNative(simulation.result.retval);
     }
     return null;
